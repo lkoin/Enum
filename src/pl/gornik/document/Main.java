@@ -17,19 +17,40 @@ public class Main {
             System.out.println(documents);
         }
 
-        System.out.println("Wprowadz dane do dokumentu ,nazwa,liczba stron,rozmiar(A3,A$),Typ dokumentu");
-        String name = scanner.nextLine();
-        int numberOfPages = scanner.nextInt();
-        scanner.nextLine();
-        String size = scanner.nextLine();
-        String docType = scanner.nextLine();
 
-        DocumentType type1 = getType(docType);
-        if (type1 != null) {
-            documentList.add(new Document(name, numberOfPages, size, type1));
-        } else System.out.println("Wprowadziles warosc z poza ENUM");
-        for (Document documents : documentList) {
-            System.out.println(documents);
+        System.out.println("Wybierz system wprowadzania (1- id , 2 - string)");
+        if (scanner.nextInt() == 2) {
+            scanner.nextLine();
+            System.out.println("Wprowadz dane do dokumentu ,nazwa,liczba stron,rozmiar(A3,A$),Typ dokumentu");
+            String name = scanner.nextLine();
+            int numberOfPages = scanner.nextInt();
+            scanner.nextLine();
+            String size = scanner.nextLine();
+            String docType = scanner.nextLine();
+
+            DocumentType type1 = getType(docType);
+            if (type1 != null) {
+                documentList.add(new Document(name, numberOfPages, size, type1));
+            } else System.out.println("Wprowadziles warosc z poza ENUM");
+            for (Document documents : documentList) {
+                System.out.println(documents);
+            }
+        } else {
+            scanner.nextLine();
+            System.out.println("Wprowadz dane do dokumentu ,nazwa,liczba stron,rozmiar(A3,A$),Typ dokumentu");
+            String name = scanner.nextLine();
+            int numberOfPages = scanner.nextInt();
+            scanner.nextLine();
+            String size = scanner.nextLine();
+            int docType = scanner.nextInt();
+
+            DocumentType type1 = getTypeId(docType);
+            if (type1 != null) {
+                documentList.add(new Document(name, numberOfPages, size, type1));
+            } else System.out.println("Wprowadziles warosc z poza ENUM");
+            for (Document documents : documentList) {
+                System.out.println(documents);
+            }
         }
     }
 
@@ -52,4 +73,24 @@ public class Main {
             }
         }
     }
-}
+
+        public static DocumentType getTypeId(int id) {
+            switch (id) {
+                case (0) -> {
+                    return DocumentType.INVOICE;
+                }
+                case (1) -> {
+                    return DocumentType.CONTRACT;
+                }
+                case (2) -> {
+                    return DocumentType.NOTARIALACT;
+                }
+                case (3) -> {
+                    return DocumentType.CERTYFICATE;
+                }
+                default -> {
+                    return null;
+                }
+            }
+        }
+    }
